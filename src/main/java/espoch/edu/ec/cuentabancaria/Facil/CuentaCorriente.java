@@ -31,17 +31,21 @@ public class CuentaCorriente extends Cuenta{
     
     
     @Override 
-    public void Consignar (float cantidad){
-        super.Consignar (cantidad);
+    public void consignar (float cantidad){
+        super.consignar (cantidad);
         if (sobregiro>0){
             if (cantidad >= sobregiro){
-                cantidad -= sobregiro;
+        
+            float cantidadRestante = cantidad - sobregiro;
                 sobregiro=0;
+                cantidad = cantidadRestante;
             }else{
-                sobregiro -= cantidad;
+                sobregiro = sobregiro - cantidad;
                 cantidad = 0;
             }
-            super.Consignar (cantidad);
+            if (cantidad > 0) {
+            super.consignar (cantidad);
+            }
         }
         numConsignaciones++;
     }
